@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="con" path="org.ccdt.ldt.ExecutionEnvironmentContainer/lua/5.1"/>
+	<buildpathentry external="true" kind="lib" path="I:/cocos/api.zip"/>
+	<buildpathentry external="true" kind="lib" path="I:/cocos/framework.zip"/>
+</buildpath>
