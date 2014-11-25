@@ -1,6 +1,7 @@
 
 require("config")
 require("framework.init")
+local NetworkHandler = require("app.Logic.NetworkHandler")
 
 -- define global module
 game = {}
@@ -8,7 +9,8 @@ game = {}
 function game.startup()
     cc.FileUtils:getInstance():addSearchPath("res/")
     display.addSpriteFrames(GAME_TEXTURE_DATA_FILENAME, GAME_TEXTURE_IMAGE_FILENAME)
-
+    --cc.FrameMgr:getInstance():getFrameCnt();
+    NetworkHandler:Init()
     game.enterMainScene()
 end
 

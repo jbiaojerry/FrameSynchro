@@ -20,6 +20,9 @@ function MainScene:ctor()
     self.layer:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)
         return self:onTouch(event.name, event.x, event.y)
     end)
+    self.layer:addNodeEventListener(cc.KEYPAD_EVENT, function(event)
+        return self:onKeypadEvent(event)
+    end)
     self:addChild(self.layer)
 
     -- create label
@@ -57,7 +60,7 @@ function MainScene:ctor()
         :align(display.LEFT_TOP, 0, display.height)
                 :addTo(self)
     NetworkHandler:GetIntance():addEventListener(NetworkHandler.EVENT_SERVER_SAY_HELLO, handler(self, self.ServerSayHello))
-    cc.Director:getInstance():pause()
+    --cc.Director:getInstance():pause()
     -- add debug node
     -- self:getPhysicsWorld():setDebugDrawMask(
     --     true and cc.PhysicsWorld.DEBUGDRAW_ALL or cc.PhysicsWorld.DEBUGDRAW_NONE)
@@ -80,8 +83,16 @@ function MainScene:onTouch(event, x, y)
     end
 end
 
+function MainScene:onKeypadEvent(event)
+    if event.key == 134 then
+        pause = cc.FrameMgr:getInstance():isPause()
+        cc.FrameMgr:getInstance():pause(not pause);
+    end
+end
+
 function MainScene:onEnter()
     self.layer:setTouchEnabled(true)
+    self.layer:setKeypadEnabled(true)
     --self:addNodeEventListener(cc.NODE_ENTER_FRAME_EVENT, handler(self, self.onEnterFrame))
     --self:scheduleUpdate()
 end
@@ -91,9 +102,11 @@ function MainScene:onEnterFrame(dt)
 end
 
 function MainScene:ServerSayHello(__event)
-    cc.Director:getInstance():resume();
+    pause = cc.FrameMgr:getInstance():isPause()
+    cc.FrameMgr:getInstance():pause(not pause);
+    --[[cc.Director:getInstance():resume();
     self.tipLabel:setString(__event.data)
-    print (__event.data)
+    print (__event.data)]]--
 end
 
 return MainScene

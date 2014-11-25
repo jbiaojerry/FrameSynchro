@@ -16,7 +16,7 @@ local STATUS_ALREADY_CONNECTED = "already connected"
 local STATUS_ALREADY_IN_PROGRESS = "Operation already in progress"
 local STATUS_TIMEOUT = "timeout"
 
-local scheduler = require("framework.scheduler")
+local scheduler = cc.FrameMgr:getInstance():getScheduler()--require("framework.scheduler")
 local socket = require "socket"
 
 local SocketTCP = class("SocketTCP")
